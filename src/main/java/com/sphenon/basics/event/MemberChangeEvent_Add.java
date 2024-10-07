@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -20,8 +20,16 @@ import com.sphenon.basics.exception.*;
 public class MemberChangeEvent_Add extends MemberChangeEvent
 {
     public MemberChangeEvent_Add (CallContext context, Object changed_object, String membername, Object value) {
-        super(context, changed_object, membername);
+        this(context, changed_object, membername, value, true);
+    }
+
+    public MemberChangeEvent_Add (CallContext context, Object changed_object, String membername, Object value, boolean is_structural) {
+        super(context, changed_object, membername, is_structural);
         this.value = value;
+    }
+
+    public MemberChangeEvent_Add clone(CallContext context) {
+        return new MemberChangeEvent_Add(context, this.changed_object, this.member_name, this.value, this.is_structural);
     }
 
     protected Object value;

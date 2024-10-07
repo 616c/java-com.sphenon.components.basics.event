@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -46,5 +46,9 @@ public class StateChangeEvent extends ChangeEvent
         super(context, changed_object);
         this.old_state = old_state;
         this.new_state = new_state;
+    }
+
+    public StateChangeEvent clone(CallContext context) {
+        return new StateChangeEvent(context, this.changed_object, this.old_state, this.new_state);
     }
 }

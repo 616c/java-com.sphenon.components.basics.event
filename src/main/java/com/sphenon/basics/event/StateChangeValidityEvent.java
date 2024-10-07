@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -18,7 +18,12 @@ import com.sphenon.basics.context.CallContext;
 import com.sphenon.basics.state.State;
 
 public class StateChangeValidityEvent extends StateChangeEvent {
-    public StateChangeValidityEvent( CallContext context, Object changed_object, State old_state, State new_state ){
-        super( context, changed_object, old_state, new_state);
+
+    public StateChangeValidityEvent(CallContext context, Object changed_object, State old_state, State new_state) {
+        super(context, changed_object, old_state, new_state);
+    }
+
+    public StateChangeValidityEvent clone(CallContext context) {
+        return new StateChangeValidityEvent(context, this.changed_object, this.old_state, this.new_state);
     }
 }

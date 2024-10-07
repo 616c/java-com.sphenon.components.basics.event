@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -21,17 +21,37 @@ import com.sphenon.basics.context.*;
 
 public class MemberChangeEvent extends ChangeEvent
 {
-    protected String membername = "";
+    protected String member_name;
 
     public String getMemberName (CallContext context) {
-        return this.membername;
+        return this.member_name;
     }
 
-    public MemberChangeEvent (CallContext context, Object changed_object, String membername) {
+    public MemberChangeEvent setMemberName (CallContext context, String member_name) {
+        this.member_name = member_name;
+        return this;
+    }
+
+    protected boolean is_structural;
+
+    public boolean isStructural (CallContext context) {
+        return this.is_structural;
+    }
+
+    public MemberChangeEvent (CallContext context, Object changed_object, String member_name) {
+        this(context, changed_object, member_name, true);
+    }
+
+    public MemberChangeEvent (CallContext context, Object changed_object, String member_name, boolean is_structural) {
         super(context, changed_object);
-        this.membername = membername;
+        this.member_name   = member_name;
+        this.is_structural = is_structural;
     }
     
+    public MemberChangeEvent clone(CallContext context) {
+        return new MemberChangeEvent(context, this.changed_object, this.member_name, this.is_structural);
+    }
+
     // ======================================================================================
     // [Issue:MemberChangeEvent.java,VUIObjectAdapterBase.java]
     // to be discussed/eliminated:

@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -22,9 +22,14 @@ public class AddEvent extends ChangeEvent
     public AddEvent (CallContext context, Object added_object) {
         super(context, added_object);
     }
+
     public AddEvent (CallContext context, Object added_object, long index){
-        this(context,added_object);
+        this(context, added_object);
         this.index = index;
+    }
+
+    public AddEvent clone(CallContext context) {
+        return new AddEvent(context, this.changed_object, this.index);
     }
 
     public long getIndex(CallContext context){

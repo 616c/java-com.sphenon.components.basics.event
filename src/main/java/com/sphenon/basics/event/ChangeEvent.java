@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -17,7 +17,7 @@ package com.sphenon.basics.event;
 import com.sphenon.basics.context.*;
 import com.sphenon.basics.exception.*;
 
-public class ChangeEvent
+public class ChangeEvent implements Event
 {
     protected Object changed_object;
 
@@ -30,5 +30,9 @@ public class ChangeEvent
 
     public Object getChangedObject(CallContext context) {
         return this.changed_object;
+    }
+
+    public ChangeEvent clone(CallContext context) {
+        return new ChangeEvent(context, this.changed_object);
     }
 }

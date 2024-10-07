@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -17,14 +17,18 @@ package com.sphenon.basics.event;
 import com.sphenon.basics.context.CallContext;
 
 public class PersistenceStateChangeEvent extends ChangeEvent {
-    public PersistenceStateChangeEvent( CallContext context, Object changedObject, PersistenceEvent event ){
-        super( context, changedObject );
+
+    public PersistenceStateChangeEvent(CallContext context, Object changedObject, PersistenceEvent event) {
+        super(context, changedObject);
+    }
+
+    public PersistenceStateChangeEvent clone(CallContext context) {
+        return new PersistenceStateChangeEvent(context, this.changed_object, this.event);
     }
     
     protected PersistenceEvent event = PersistenceEvent.Initial;
     
-    public PersistenceEvent
-    getEvent(CallContext context){
+    public PersistenceEvent getEvent(CallContext context){
         return this.event;
     }
 

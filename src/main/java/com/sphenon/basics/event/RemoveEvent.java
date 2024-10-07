@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -26,6 +26,10 @@ public class RemoveEvent extends ChangeEvent
     public RemoveEvent (CallContext context, Object removed_object, long index){
         this(context,removed_object);
         this.index = index;
+    }
+
+    public RemoveEvent clone(CallContext context) {
+        return new RemoveEvent(context, this.changed_object, this.index);
     }
 
     public long getIndex(CallContext context){

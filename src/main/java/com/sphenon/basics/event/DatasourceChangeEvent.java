@@ -1,7 +1,7 @@
 package com.sphenon.basics.event;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -19,15 +19,15 @@ import com.sphenon.basics.exception.*;
 
 public class DatasourceChangeEvent extends ChangeEvent
 {
-    protected Object datasource = null;
-
-    public Object
-    getDatasource(CallContext context){
-        return this.datasource;
+    public Object getDatasource(CallContext context) {
+        return this.changed_object;
     }
 
-
-    public DatasourceChangeEvent (CallContext context, Object datasource) {
+    public DatasourceChangeEvent(CallContext context, Object datasource) {
         super(context, datasource);
+    }
+
+    public DatasourceChangeEvent clone(CallContext context) {
+        return new DatasourceChangeEvent(context, this.changed_object);
     }
 }

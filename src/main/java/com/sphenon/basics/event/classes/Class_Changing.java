@@ -1,7 +1,7 @@
 package com.sphenon.basics.event.classes;
 
 /****************************************************************************
-  Copyright 2001-2018 Sphenon GmbH
+  Copyright 2001-2024 Sphenon GmbH
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy
@@ -125,6 +125,14 @@ public class Class_Changing implements Changing {
     public void enableEvents(CallContext context) {
         this.events_disabled = false;
     }
+
+    public void activateBroadcast(CallContext context) {
+        EventContext ec = EventContext.get((Context) context);
+        if (ec != null) {
+            EventListener_ChangeEvent_ elce = ec.getListener(context);
+            if (elce != null) {
+                this.getChangeEventDispatcher(context).addListener(context, elce);
+            }
+        }
+    }
 }
-
-
